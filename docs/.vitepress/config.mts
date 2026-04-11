@@ -14,9 +14,9 @@ export default defineConfig({
   themeConfig: {
     nav: [
       { text: '原点', link: '/' },
-      { text: '存档', link: '/posts/' },
-      { text: '碎语', link: '/tweets/' },
-      { text: '蒸馏', link: '/works' },
+      { text: '存档', link: '/archive/' },
+      { text: '碎语', link: '/murmur/' },
+      { text: '蒸馏', link: '/distill/' },
     ],
 
     sidebar: false,
@@ -32,7 +32,7 @@ export default defineConfig({
     search: {
       provider: 'local',
       options: {
-        exclude: ['/tweets/**', '/works'],
+        exclude: ['/murmur/**', '/distill/**'],
         translations: {
           button: {
             buttonText: '打捞',

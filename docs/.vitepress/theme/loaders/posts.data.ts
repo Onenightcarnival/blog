@@ -8,10 +8,10 @@ export interface PostData {
   tags?: string[]
 }
 
-export default createContentLoader('posts/*.md', {
+export default createContentLoader('archive/*.md', {
   transform(rawData): PostData[] {
     return rawData
-      .filter((page) => page.url !== '/posts/')
+      .filter((page) => page.url !== '/archive/')
       .sort((a, b) => +new Date(b.frontmatter.date) - +new Date(a.frontmatter.date))
       .map((page) => ({
         url: page.url,
