@@ -12,7 +12,13 @@ const categories = [
   },
   {
     name: '做出来的',
-    items: [],
+    items: [
+      {
+        title: 'complexipy-mcp',
+        description: '基于 complexipy 的 MCP server，为 Python 代码库提供认知复杂度分析，帮助定位过于复杂的函数。',
+        link: 'https://github.com/Onenightcarnival/complexipy-mcp',
+      },
+    ],
   },
 ]
 </script>
