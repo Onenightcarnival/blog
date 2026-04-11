@@ -1,6 +1,6 @@
 ---
 layout: page
-title: 作品
+title: 蒸馏
 ---
 
 <WorksShowcase />

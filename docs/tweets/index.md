@@ -1,6 +1,6 @@
 ---
 layout: page
-title: 微博
+title: 碎语
 ---
 
 <TweetFeed />

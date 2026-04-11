@@ -1,6 +1,6 @@
 ---
 layout: page
-title: 文章
+title: 存档
 ---
 
 <ArticleTimeline />
