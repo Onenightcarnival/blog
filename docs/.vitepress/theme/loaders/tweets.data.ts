@@ -6,11 +6,11 @@ export interface TweetData {
   html: string
 }
 
-export default createContentLoader('murmur/*.md', {
+export default createContentLoader('{,en/}murmur/*.md', {
   render: true,
   transform(rawData): TweetData[] {
     return rawData
-      .filter((page) => page.url !== '/murmur/')
+      .filter((page) => !page.url.endsWith('/murmur/'))
       .sort((a, b) => +new Date(b.frontmatter.date) - +new Date(a.frontmatter.date))
       .map((page) => ({
         url: page.url,

@@ -2,10 +2,19 @@
 import { computed } from 'vue'
 import { withBase } from 'vitepress'
 import { data as posts } from '../loaders/posts.data'
+import { useI18n } from '../i18n'
+
+const { t, isEn } = useI18n()
+
+const localePosts = computed(() =>
+  posts.filter(post =>
+    isEn.value ? post.url.startsWith('/en/') : !post.url.startsWith('/en/')
+  )
+)
 
 const groupedByYear = computed(() => {
   const groups = {}
-  for (const post of posts) {
+  for (const post of localePosts.value) {
     const year = new Date(post.date).getFullYear()
     if (!groups[year]) groups[year] = []
     groups[year].push(post)
@@ -24,8 +33,8 @@ function formatDate(dateStr) {
 
 <template>
   <div class="article-timeline">
-    <div v-if="posts.length === 0" class="empty">
-      还没有文章，敬请期待...
+    <div v-if="localePosts.length === 0" class="empty">
+      {{ t.emptyArticles }}
     </div>
     <div class="timeline-track">
       <div v-for="[year, yearPosts] in groupedByYear" :key="year" class="year-group">

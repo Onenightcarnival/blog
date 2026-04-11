@@ -3,13 +3,35 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: "Onenightcarnival",
   description: "散是 token，聚是 skill，至少博客还活着",
-  lang: 'zh-CN',
   appearance: 'force-dark',
 
   // GitHub Pages deploy base path
   // If deploying to https://<user>.github.io/blog/, set base to '/blog/'
   // If deploying to a custom domain, set base to '/'
   base: '/blog/',
+
+  locales: {
+    root: {
+      label: '中文',
+      lang: 'zh-CN',
+    },
+    en: {
+      label: 'English',
+      lang: 'en-US',
+      description: 'Scattered as tokens, gathered as skills — at least the blog is alive',
+      themeConfig: {
+        nav: [
+          { text: 'Home', link: '/en/' },
+          { text: 'Archive', link: '/en/archive/' },
+          { text: 'Murmur', link: '/en/murmur/' },
+          { text: 'Distill', link: '/en/distill/' },
+        ],
+        outline: {
+          label: 'On this page',
+        },
+      },
+    },
+  },
 
   themeConfig: {
     nav: [
@@ -32,21 +54,44 @@ export default defineConfig({
     search: {
       provider: 'local',
       options: {
-        exclude: ['/murmur/**', '/distill/**'],
-        translations: {
-          button: {
-            buttonText: '打捞',
-            buttonAriaLabel: '打捞',
+        exclude: ['/murmur/**', '/distill/**', '/en/murmur/**', '/en/distill/**'],
+        locales: {
+          root: {
+            translations: {
+              button: {
+                buttonText: '打捞',
+                buttonAriaLabel: '打捞',
+              },
+              modal: {
+                displayDetails: '显示详情',
+                resetButtonTitle: '清除',
+                backButtonTitle: '返回',
+                noResultsText: '捞了个寂寞',
+                footer: {
+                  selectText: '选择',
+                  navigateText: '切换',
+                  closeText: '关闭',
+                },
+              },
+            },
           },
-          modal: {
-            displayDetails: '显示详情',
-            resetButtonTitle: '清除',
-            backButtonTitle: '返回',
-            noResultsText: '捞了个寂寞',
-            footer: {
-              selectText: '选择',
-              navigateText: '切换',
-              closeText: '关闭',
+          en: {
+            translations: {
+              button: {
+                buttonText: 'Search',
+                buttonAriaLabel: 'Search',
+              },
+              modal: {
+                displayDetails: 'Show details',
+                resetButtonTitle: 'Clear',
+                backButtonTitle: 'Back',
+                noResultsText: 'No results found',
+                footer: {
+                  selectText: 'Select',
+                  navigateText: 'Navigate',
+                  closeText: 'Close',
+                },
+              },
             },
           },
         },

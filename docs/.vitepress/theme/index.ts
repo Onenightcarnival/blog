@@ -6,6 +6,7 @@ import './styles/cosmic.css'
 import ArticleTimeline from './components/ArticleTimeline.vue'
 import TweetFeed from './components/TweetFeed.vue'
 import WorksShowcase from './components/WorksShowcase.vue'
+import TranslationBanner from './components/TranslationBanner.vue'
 
 export default {
   extends: DefaultTheme,
@@ -14,5 +15,6 @@ export default {
     app.component('ArticleTimeline', ArticleTimeline)
     app.component('TweetFeed', TweetFeed)
     app.component('WorksShowcase', WorksShowcase)
+    app.component('TranslationBanner', TranslationBanner)
   },
 } satisfies Theme

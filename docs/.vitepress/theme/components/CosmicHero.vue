@@ -1,13 +1,16 @@
 <script setup>
+import { useI18n } from '../i18n'
+
+const { t } = useI18n()
 </script>
 
 <template>
   <div class="cosmic-hero">
-    <p class="hero-slogan">一个 SBTI 测出 DEAD 的 AI 工程师，在 2028 危机到来之前，抢先把自己蒸馏成 skill</p>
+    <p class="hero-slogan">{{ t.heroSlogan }}</p>
     <h1 class="hero-name">
-      <span class="hero-name-clip">散是 token，聚是 skill</span>
+      <span class="hero-name-clip">{{ t.heroName }}</span>
     </h1>
-    <p class="hero-subtitle">至少博客还活着</p>
+    <p class="hero-subtitle">{{ t.heroSubtitle }}</p>
   </div>
 </template>
 

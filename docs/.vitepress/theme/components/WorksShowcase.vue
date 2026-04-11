@@ -1,5 +1,10 @@
 <script setup>
-const categories = [
+import { computed } from 'vue'
+import { useI18n } from '../i18n'
+
+const { t, isEn } = useI18n()
+
+const zhCategories = [
   {
     name: '想明白的',
     items: [
@@ -21,6 +26,31 @@ const categories = [
     ],
   },
 ]
+
+const enCategories = [
+  {
+    name: 'Figured Out',
+    items: [
+      {
+        title: 'Engineering Philosophy for LLM Applications',
+        description: 'When the core component of a software system shifts from deterministic functions to probabilistic language models — what changes in software engineering, and what stays the same.',
+        link: 'https://onenightcarnival.github.io/llm-engineering-philosophy/',
+      },
+    ],
+  },
+  {
+    name: 'Built',
+    items: [
+      {
+        title: 'complexipy-mcp',
+        description: 'An MCP server built on complexipy, providing cognitive complexity analysis for Python codebases to help locate overly complex functions.',
+        link: 'https://github.com/Onenightcarnival/complexipy-mcp',
+      },
+    ],
+  },
+]
+
+const categories = computed(() => isEn.value ? enCategories : zhCategories)
 </script>
 
 <template>
@@ -31,7 +61,7 @@ const categories = [
         <span class="category-label">{{ cat.name }}</span>
       </div>
       <div v-if="cat.items.length === 0" class="empty-hint">
-        敬请期待...
+        {{ t.stayTuned }}
       </div>
       <div v-for="item in cat.items" :key="item.title" class="work-node">
         <div class="work-dot" />

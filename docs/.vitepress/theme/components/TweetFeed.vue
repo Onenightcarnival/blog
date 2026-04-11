@@ -1,5 +1,15 @@
 <script setup>
+import { computed } from 'vue'
 import { data as tweets } from '../loaders/tweets.data'
+import { useI18n } from '../i18n'
+
+const { t, isEn } = useI18n()
+
+const localeTweets = computed(() =>
+  tweets.filter(tweet =>
+    isEn.value ? tweet.url.startsWith('/en/') : !tweet.url.startsWith('/en/')
+  )
+)
 
 function formatDate(dateStr) {
   const d = new Date(dateStr)
@@ -12,10 +22,10 @@ function formatDate(dateStr) {
 
 <template>
   <div class="tweet-feed">
-    <div v-if="tweets.length === 0" class="empty">
-      还没有微博，敬请期待...
+    <div v-if="localeTweets.length === 0" class="empty">
+      {{ t.emptyTweets }}
     </div>
-    <div v-for="tweet in tweets" :key="tweet.url" class="tweet-card">
+    <div v-for="tweet in localeTweets" :key="tweet.url" class="tweet-card">
       <div class="tweet-date">{{ formatDate(tweet.date) }}</div>
       <div class="tweet-content" v-html="tweet.html" />
     </div>
