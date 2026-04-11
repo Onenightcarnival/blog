@@ -1,10 +1,6 @@
 ---
 title: Hello World
-date: 2026-04-11
-category: 技术
-tags:
-  - blog
-  - vitepress
+date: 2026-04-11 08:00
 ---
 
 # Hello World

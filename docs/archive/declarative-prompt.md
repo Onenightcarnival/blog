@@ -1,7 +1,6 @@
 ---
 title: 汇编→C→SQL→React→……Prompt？
-date: 2026-04-11
-category: 技术
+date: 2026-04-11 14:00
 ---
 
 # 汇编→C→SQL→React→……Prompt？
