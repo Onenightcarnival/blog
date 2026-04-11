@@ -1,0 +1,25 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "description": "一个 SBTI 测出 DEAD 的 AI 工程师，在 2028 危机到来之前，抢先把自己蒸馏成 skill —— 散是 token，聚是 skill，至少博客还活着",
+  "scripts": {
+    "dev": "vitepress dev docs",
+    "build": "vitepress build docs",
+    "preview": "vitepress preview docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Onenightcarnival/blog.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "CC-BY-NC-SA-4.0",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/Onenightcarnival/blog/issues"
+  },
+  "homepage": "https://github.com/Onenightcarnival/blog#readme",
+  "devDependencies": {
+    "vitepress": "^1.6.4"
+  }
+}

@@ -1,0 +1,73 @@
+/* Force dark mode */
+:root {
+  color-scheme: dark;
+}
+
+.dark {
+  /* Deep space base */
+  --vp-c-bg: #0a0a0f;
+  --vp-c-bg-alt: #0d0d14;
+  --vp-c-bg-elv: #12121a;
+  --vp-c-bg-soft: #14141e;
+
+  /* Cold purple-blue accent */
+  --vp-c-brand-1: #8b9cf7;
+  --vp-c-brand-2: #7b8de7;
+  --vp-c-brand-3: #6b7dd7;
+  --vp-c-brand-soft: rgba(139, 156, 247, 0.12);
+
+  /* Cool-toned text */
+  --vp-c-text-1: rgba(235, 235, 245, 0.86);
+  --vp-c-text-2: rgba(235, 235, 245, 0.5);
+  --vp-c-text-3: rgba(235, 235, 245, 0.3);
+
+  /* Borders */
+  --vp-c-border: rgba(139, 156, 247, 0.12);
+  --vp-c-divider: rgba(139, 156, 247, 0.08);
+  --vp-c-gutter: #000000;
+
+  /* Nav */
+  --vp-nav-bg-color: rgba(10, 10, 15, 0.8);
+
+  /* Hero gradient */
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: linear-gradient(135deg, #8b9cf7 0%, #c4b5fd 50%, #e0d4ff 100%);
+
+  /* Button */
+  --vp-button-brand-border: rgba(139, 156, 247, 0.3);
+  --vp-button-brand-text: #fff;
+  --vp-button-brand-bg: rgba(139, 156, 247, 0.2);
+  --vp-button-brand-hover-border: rgba(139, 156, 247, 0.5);
+  --vp-button-brand-hover-text: #fff;
+  --vp-button-brand-hover-bg: rgba(139, 156, 247, 0.3);
+  --vp-button-brand-active-border: rgba(139, 156, 247, 0.6);
+  --vp-button-brand-active-text: #fff;
+  --vp-button-brand-active-bg: rgba(139, 156, 247, 0.35);
+
+  --vp-button-alt-border: rgba(255, 255, 255, 0.1);
+  --vp-button-alt-text: rgba(235, 235, 245, 0.86);
+  --vp-button-alt-bg: rgba(255, 255, 255, 0.04);
+  --vp-button-alt-hover-border: rgba(255, 255, 255, 0.2);
+  --vp-button-alt-hover-text: #fff;
+  --vp-button-alt-hover-bg: rgba(255, 255, 255, 0.08);
+
+  /* Code */
+  --vp-code-bg: rgba(139, 156, 247, 0.08);
+  --vp-code-color: #c4b5fd;
+}
+
+/* Glassmorphism nav */
+.VPNav .VPNavBar {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Hide dark/light toggle */
+.VPSwitchAppearance {
+  display: none !important;
+}
+
+/* Subtle footer */
+.VPFooter {
+  border-top-color: rgba(139, 156, 247, 0.08) !important;
+}

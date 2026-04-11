@@ -1,0 +1,173 @@
+<script setup>
+import { computed } from 'vue'
+import { withBase } from 'vitepress'
+import { data as posts } from '../loaders/posts.data'
+
+const groupedByYear = computed(() => {
+  const groups = {}
+  for (const post of posts) {
+    const year = new Date(post.date).getFullYear()
+    if (!groups[year]) groups[year] = []
+    groups[year].push(post)
+  }
+  return Object.entries(groups)
+    .sort(([a], [b]) => Number(b) - Number(a))
+})
+
+function formatDate(dateStr) {
+  const d = new Date(dateStr)
+  const m = String(d.getMonth() + 1).padStart(2, '0')
+  const day = String(d.getDate()).padStart(2, '0')
+  return `${m}-${day}`
+}
+</script>
+
+<template>
+  <div class="article-timeline">
+    <div v-if="posts.length === 0" class="empty">
+      还没有文章，敬请期待...
+    </div>
+    <div class="timeline-track">
+      <div v-for="[year, yearPosts] in groupedByYear" :key="year" class="year-group">
+        <div class="year-node">
+          <div class="year-dot" />
+          <span class="year-label">{{ year }}</span>
+        </div>
+        <div v-for="post in yearPosts" :key="post.url" class="post-node">
+          <div class="post-dot" />
+          <div class="post-card">
+            <span class="post-date">{{ formatDate(post.date) }}</span>
+            <a :href="withBase(post.url)" class="post-link">{{ post.title }}</a>
+            <span v-if="post.category" class="post-category">{{ post.category }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<style scoped>
+.article-timeline {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 32px 0;
+}
+
+.empty {
+  color: var(--vp-c-text-3);
+  text-align: center;
+  padding: 60px 0;
+}
+
+/* Vertical axis line */
+.timeline-track {
+  position: relative;
+  padding-left: 32px;
+}
+
+.timeline-track::before {
+  content: '';
+  position: absolute;
+  left: 7px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(
+    180deg,
+    var(--vp-c-brand-1) 0%,
+    var(--vp-c-brand-soft) 100%
+  );
+}
+
+/* Year node */
+.year-group {
+  margin-bottom: 8px;
+}
+
+.year-node {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 16px 0 8px;
+}
+
+.year-dot {
+  position: absolute;
+  left: -32px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--vp-c-bg);
+  border: 3px solid var(--vp-c-brand-1);
+  box-shadow: 0 0 12px rgba(139, 156, 247, 0.3);
+}
+
+.year-label {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--vp-c-brand-1);
+  letter-spacing: 1px;
+}
+
+/* Post node */
+.post-node {
+  position: relative;
+  padding: 8px 0;
+}
+
+.post-dot {
+  position: absolute;
+  left: -28px;
+  top: 18px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--vp-c-brand-1);
+  opacity: 0.6;
+  transition: all 0.25s;
+}
+
+.post-node:hover .post-dot {
+  opacity: 1;
+  box-shadow: 0 0 8px rgba(139, 156, 247, 0.5);
+}
+
+.post-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.post-card:hover {
+  background: var(--vp-c-bg-soft);
+}
+
+.post-date {
+  font-size: 13px;
+  color: var(--vp-c-text-3);
+  font-family: var(--vp-font-family-mono);
+  flex-shrink: 0;
+}
+
+.post-link {
+  color: var(--vp-c-text-1);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.post-link:hover {
+  color: var(--vp-c-brand-1);
+}
+
+.post-category {
+  font-size: 12px;
+  color: var(--vp-c-brand-1);
+  background: var(--vp-c-brand-soft);
+  padding: 2px 8px;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+</style>
