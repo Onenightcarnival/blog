@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from 'vue'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { useI18n } from '../i18n'
 
 const { t, isEn } = useI18n()
@@ -51,10 +51,39 @@ const enCategories = [
 ]
 
 const categories = computed(() => isEn.value ? enCategories : zhCategories)
+
+// Scroll reveal
+const showcaseRef = ref(null)
+let observer = null
+
+onMounted(() => {
+  observer = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed')
+          observer.unobserve(entry.target)
+        }
+      }
+    },
+    { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+  )
+
+  if (showcaseRef.value) {
+    const nodes = showcaseRef.value.querySelectorAll('.category-group, .work-node')
+    for (const node of nodes) {
+      observer.observe(node)
+    }
+  }
+})
+
+onUnmounted(() => {
+  if (observer) observer.disconnect()
+})
 </script>
 
 <template>
-  <div class="works-showcase">
+  <div class="works-showcase" ref="showcaseRef">
     <div v-for="cat in categories" :key="cat.name" class="category-group">
       <div class="category-node">
         <div class="category-dot" />
@@ -102,6 +131,20 @@ const categories = computed(() => isEn.value ? enCategories : zhCategories)
   );
 }
 
+/* Scroll reveal */
+.category-group,
+.work-node {
+  opacity: 0;
+  transform: translateX(-12px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.category-group.revealed,
+.work-node.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
 .category-group {
   margin-bottom: 8px;
 }
@@ -122,6 +165,11 @@ const categories = computed(() => isEn.value ? enCategories : zhCategories)
   background: var(--vp-c-bg);
   border: 3px solid var(--vp-c-brand-1);
   box-shadow: 0 0 12px rgba(139, 156, 247, 0.3);
+  transition: box-shadow 0.3s;
+}
+
+.category-group:hover .category-dot {
+  box-shadow: 0 0 20px rgba(139, 156, 247, 0.5);
 }
 
 .category-label {
@@ -156,7 +204,8 @@ const categories = computed(() => isEn.value ? enCategories : zhCategories)
 
 .work-node:hover .work-dot {
   opacity: 1;
-  box-shadow: 0 0 8px rgba(139, 156, 247, 0.5);
+  box-shadow: 0 0 10px rgba(139, 156, 247, 0.6);
+  transform: scale(1.3);
 }
 
 .work-card {
@@ -164,11 +213,15 @@ const categories = computed(() => isEn.value ? enCategories : zhCategories)
   border: 1px solid var(--vp-c-border);
   border-radius: 8px;
   background: var(--vp-c-bg-elv);
-  transition: all 0.25s;
+  transition: all 0.3s ease;
 }
 
 .work-card:hover {
   border-color: rgba(139, 156, 247, 0.25);
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.3),
+    0 0 40px rgba(139, 156, 247, 0.06);
+  transform: translateX(4px);
 }
 
 .work-title {
@@ -191,6 +244,11 @@ const categories = computed(() => isEn.value ? enCategories : zhCategories)
   font-size: 13px;
   opacity: 0.5;
   margin-left: 4px;
+  transition: opacity 0.2s;
+}
+
+.work-title a:hover .external-icon {
+  opacity: 1;
 }
 
 .work-desc {

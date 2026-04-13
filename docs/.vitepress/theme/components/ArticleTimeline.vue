@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from 'vue'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { withBase } from 'vitepress'
 import { data as posts } from '../loaders/posts.data'
 import { useI18n } from '../i18n'
@@ -29,10 +29,39 @@ function formatDate(dateStr) {
   const day = String(d.getDate()).padStart(2, '0')
   return `${m}-${day}`
 }
+
+// Scroll-driven reveal
+const timelineRef = ref(null)
+let observer = null
+
+onMounted(() => {
+  observer = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed')
+          observer.unobserve(entry.target)
+        }
+      }
+    },
+    { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+  )
+
+  if (timelineRef.value) {
+    const nodes = timelineRef.value.querySelectorAll('.year-group, .post-node')
+    for (const node of nodes) {
+      observer.observe(node)
+    }
+  }
+})
+
+onUnmounted(() => {
+  if (observer) observer.disconnect()
+})
 </script>
 
 <template>
-  <div class="article-timeline">
+  <div class="article-timeline" ref="timelineRef">
     <div v-if="localePosts.length === 0" class="empty">
       {{ t.emptyArticles }}
     </div>
@@ -88,6 +117,26 @@ function formatDate(dateStr) {
   );
 }
 
+/* Scroll reveal */
+.year-group,
+.post-node {
+  opacity: 0;
+  transform: translateX(-12px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.year-group.revealed,
+.post-node.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Stagger children */
+.post-node:nth-child(2) { transition-delay: 0.05s; }
+.post-node:nth-child(3) { transition-delay: 0.1s; }
+.post-node:nth-child(4) { transition-delay: 0.15s; }
+.post-node:nth-child(5) { transition-delay: 0.2s; }
+
 /* Year node */
 .year-group {
   margin-bottom: 8px;
@@ -109,6 +158,11 @@ function formatDate(dateStr) {
   background: var(--vp-c-bg);
   border: 3px solid var(--vp-c-brand-1);
   box-shadow: 0 0 12px rgba(139, 156, 247, 0.3);
+  transition: box-shadow 0.3s;
+}
+
+.year-group:hover .year-dot {
+  box-shadow: 0 0 20px rgba(139, 156, 247, 0.5);
 }
 
 .year-label {
@@ -138,7 +192,8 @@ function formatDate(dateStr) {
 
 .post-node:hover .post-dot {
   opacity: 1;
-  box-shadow: 0 0 8px rgba(139, 156, 247, 0.5);
+  box-shadow: 0 0 10px rgba(139, 156, 247, 0.6);
+  transform: scale(1.3);
 }
 
 .post-card {
@@ -147,11 +202,15 @@ function formatDate(dateStr) {
   gap: 12px;
   padding: 12px 16px;
   border-radius: 8px;
-  transition: background 0.2s;
+  border: 1px solid transparent;
+  transition: all 0.3s ease;
 }
 
 .post-card:hover {
-  background: var(--vp-c-bg-soft);
+  background: rgba(139, 156, 247, 0.04);
+  border-color: rgba(139, 156, 247, 0.1);
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.2);
+  transform: translateX(4px);
 }
 
 .post-date {

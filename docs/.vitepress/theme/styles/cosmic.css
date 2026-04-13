@@ -58,8 +58,9 @@
 
 /* Glassmorphism nav */
 .VPNav .VPNavBar {
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(16px) saturate(1.2);
+  -webkit-backdrop-filter: blur(16px) saturate(1.2);
+  border-bottom: 1px solid rgba(139, 156, 247, 0.06);
 }
 
 /* Hide dark/light toggle */
@@ -70,4 +71,82 @@
 /* Subtle footer */
 .VPFooter {
   border-top-color: rgba(139, 156, 247, 0.08) !important;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(139, 156, 247, 0.2);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(139, 156, 247, 0.35);
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Selection color */
+::selection {
+  background: rgba(139, 156, 247, 0.3);
+  color: #fff;
+}
+
+/* Nav link hover glow */
+.VPNavBarMenuLink .VPLink:hover {
+  color: var(--vp-c-brand-1) !important;
+  text-shadow: 0 0 12px rgba(139, 156, 247, 0.3);
+}
+
+/* Content page enhancements */
+.vp-doc h1,
+.vp-doc h2,
+.vp-doc h3 {
+  background: linear-gradient(135deg, var(--vp-c-text-1), var(--vp-c-brand-1));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Code block glow */
+.vp-doc div[class*='language-'] {
+  border: 1px solid rgba(139, 156, 247, 0.08);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3), 0 0 40px rgba(139, 156, 247, 0.03);
+}
+
+/* Scroll progress bar */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #8b9cf7, #c4b5fd, #e0d4ff);
+  z-index: 999;
+  transition: width 0.1s linear;
+}
+
+/* Page transition */
+.VPContent {
+  animation: page-enter 0.4s ease;
+}
+
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

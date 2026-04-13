@@ -1,11 +1,20 @@
 <script setup>
+import { ref, onMounted } from 'vue'
 import { useI18n } from '../i18n'
 
 const { t } = useI18n()
+const visible = ref(false)
+
+onMounted(() => {
+  requestAnimationFrame(() => {
+    visible.value = true
+  })
+})
 </script>
 
 <template>
-  <div class="cosmic-hero">
+  <div class="cosmic-hero" :class="{ visible }">
+    <div class="hero-glow" />
     <p class="hero-slogan">{{ t.heroSlogan }}</p>
     <h1 class="hero-name">
       <span class="hero-name-clip">{{ t.heroName }}</span>
@@ -18,6 +27,38 @@ const { t } = useI18n()
 .cosmic-hero {
   text-align: center;
   padding: 80px 24px 60px;
+  position: relative;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.cosmic-hero.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(139, 156, 247, 0.08) 0%,
+    rgba(139, 156, 247, 0.02) 40%,
+    transparent 70%
+  );
+  pointer-events: none;
+  animation: hero-pulse 6s ease-in-out infinite;
+}
+
+@keyframes hero-pulse {
+  0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 1; transform: translate(-50%, -50%) scale(1.15); }
 }
 
 .hero-slogan {
@@ -28,6 +69,8 @@ const { t } = useI18n()
   max-width: 480px;
   margin-left: auto;
   margin-right: auto;
+  opacity: 0;
+  animation: hero-fade-up 0.8s ease 0.3s forwards;
 }
 
 .hero-name {
@@ -35,73 +78,44 @@ const { t } = useI18n()
   font-size: 36px;
   font-weight: 700;
   line-height: 1.2;
+  opacity: 0;
+  animation: hero-fade-up 0.8s ease 0.1s forwards;
 }
 
 .hero-name-clip {
   background: var(--vp-home-hero-name-background);
+  background-size: 200% 200%;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  animation: gradient-shift 8s ease infinite;
 }
 
-.hero-tagline {
-  margin: 0 0 8px;
-  font-size: 20px;
-  color: var(--vp-c-text-1);
-  font-weight: 500;
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes hero-fade-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .hero-subtitle {
   margin: 0;
   font-size: 16px;
   color: var(--vp-c-text-3);
-}
-
-.hero-actions {
-  display: flex;
-  gap: 16px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.action-btn {
-  display: inline-block;
-  padding: 10px 28px;
-  border-radius: 20px;
-  font-size: 14px;
-  font-weight: 500;
-  text-decoration: none;
-  transition: all 0.25s;
-}
-
-.action-btn.brand {
-  color: var(--vp-button-brand-text);
-  background: var(--vp-button-brand-bg);
-  border: 1px solid var(--vp-button-brand-border);
-}
-
-.action-btn.brand:hover {
-  background: var(--vp-button-brand-hover-bg);
-  border-color: var(--vp-button-brand-hover-border);
-}
-
-.action-btn.alt {
-  color: var(--vp-button-alt-text);
-  background: var(--vp-button-alt-bg);
-  border: 1px solid var(--vp-button-alt-border);
-}
-
-.action-btn.alt:hover {
-  background: var(--vp-button-alt-hover-bg);
-  border-color: var(--vp-button-alt-hover-border);
+  opacity: 0;
+  animation: hero-fade-up 0.8s ease 0.5s forwards;
 }
 
 @media (min-width: 640px) {
   .hero-name {
     font-size: 48px;
   }
-  .hero-tagline {
-    font-size: 24px;
+  .hero-glow {
+    width: 600px;
+    height: 600px;
   }
 }
 </style>
