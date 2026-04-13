@@ -5,6 +5,21 @@ export default defineConfig({
   description: "散是 token，聚是 skill，至少博客还活着",
   appearance: 'force-dark',
 
+  markdown: {
+    config(md) {
+      const defaultFence = md.renderer.rules.fence!
+      md.renderer.rules.fence = (tokens, idx, options, env, self) => {
+        const token = tokens[idx]
+        const info = token.info.trim()
+        if (info === 'python run' || info.startsWith('python run ')) {
+          const encoded = Buffer.from(token.content).toString('base64')
+          return `<PyodideRunner code="${encoded}" />\n`
+        }
+        return defaultFence(tokens, idx, options, env, self)
+      }
+    },
+  },
+
   // GitHub Pages deploy base path
   // If deploying to https://<user>.github.io/blog/, set base to '/blog/'
   // If deploying to a custom domain, set base to '/'
