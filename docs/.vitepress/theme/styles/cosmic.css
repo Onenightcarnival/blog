@@ -1,8 +1,9 @@
-/* Force dark mode */
+/* Force dark mode (VitePress level — we handle our own light via .dusk) */
 :root {
   color-scheme: dark;
 }
 
+/* ===== Night theme (default) ===== */
 .dark {
   /* Deep space base */
   --vp-c-bg: #0a0a0f;
@@ -54,13 +55,101 @@
   /* Code */
   --vp-code-bg: rgba(139, 156, 247, 0.08);
   --vp-code-color: #c4b5fd;
+
+  /* Cosmic theme tokens */
+  --cosmic-glow: rgba(139, 156, 247, 0.08);
+  --cosmic-glow-soft: rgba(139, 156, 247, 0.02);
+  --cosmic-accent-rgb: 139, 156, 247;
+  --cosmic-progress-1: #8b9cf7;
+  --cosmic-progress-2: #c4b5fd;
+  --cosmic-progress-3: #e0d4ff;
+  --cosmic-heading-from: rgba(235, 235, 245, 0.86);
+  --cosmic-heading-to: #8b9cf7;
+  --cosmic-shadow-color: rgba(0, 0, 0, 0.3);
+  --cosmic-code-shadow: rgba(0, 0, 0, 0.3);
+  --cosmic-selection-text: #fff;
+}
+
+/* ===== Dawn theme (warm light) ===== */
+.dark.dusk {
+  color-scheme: light;
+
+  /* Warm cream/parchment base */
+  --vp-c-bg: #faf6f0;
+  --vp-c-bg-alt: #f5efe6;
+  --vp-c-bg-elv: #ffffff;
+  --vp-c-bg-soft: #f0e9de;
+
+  /* Warm amber accent — deeper for contrast on light bg */
+  --vp-c-brand-1: #c8860a;
+  --vp-c-brand-2: #b5780a;
+  --vp-c-brand-3: #a06a08;
+  --vp-c-brand-soft: rgba(200, 134, 10, 0.10);
+
+  /* Dark warm text */
+  --vp-c-text-1: #3d3428;
+  --vp-c-text-2: #7a6e5d;
+  --vp-c-text-3: #a89e8e;
+
+  /* Borders */
+  --vp-c-border: rgba(180, 160, 130, 0.25);
+  --vp-c-divider: rgba(180, 160, 130, 0.15);
+  --vp-c-gutter: #ede7dc;
+
+  /* Nav */
+  --vp-nav-bg-color: rgba(250, 246, 240, 0.85);
+
+  /* Hero gradient */
+  --vp-home-hero-name-background: linear-gradient(135deg, #c8860a 0%, #d4a030 50%, #e8c060 100%);
+
+  /* Button */
+  --vp-button-brand-border: rgba(200, 134, 10, 0.3);
+  --vp-button-brand-text: #fff;
+  --vp-button-brand-bg: rgba(200, 134, 10, 0.12);
+  --vp-button-brand-hover-border: rgba(200, 134, 10, 0.5);
+  --vp-button-brand-hover-text: #fff;
+  --vp-button-brand-hover-bg: rgba(200, 134, 10, 0.2);
+  --vp-button-brand-active-border: rgba(200, 134, 10, 0.6);
+  --vp-button-brand-active-text: #fff;
+  --vp-button-brand-active-bg: rgba(200, 134, 10, 0.25);
+
+  --vp-button-alt-border: rgba(60, 52, 40, 0.12);
+  --vp-button-alt-text: #3d3428;
+  --vp-button-alt-bg: rgba(60, 52, 40, 0.04);
+  --vp-button-alt-hover-border: rgba(60, 52, 40, 0.2);
+  --vp-button-alt-hover-text: #3d3428;
+  --vp-button-alt-hover-bg: rgba(60, 52, 40, 0.08);
+
+  /* Code */
+  --vp-code-bg: rgba(200, 134, 10, 0.07);
+  --vp-code-color: #a06a08;
+
+  /* Cosmic theme tokens */
+  --cosmic-glow: rgba(200, 134, 10, 0.06);
+  --cosmic-glow-soft: rgba(200, 134, 10, 0.02);
+  --cosmic-accent-rgb: 200, 134, 10;
+  --cosmic-progress-1: #c8860a;
+  --cosmic-progress-2: #d4a030;
+  --cosmic-progress-3: #e8c060;
+  --cosmic-heading-from: #3d3428;
+  --cosmic-heading-to: #c8860a;
+  --cosmic-shadow-color: rgba(100, 80, 50, 0.08);
+  --cosmic-code-shadow: rgba(100, 80, 50, 0.06);
+  --cosmic-selection-text: #fff;
+}
+
+/* ===== Global styles ===== */
+
+/* Theme transition */
+.dark {
+  transition: background-color 0.4s ease, color 0.3s ease;
 }
 
 /* Glassmorphism nav */
 .VPNav .VPNavBar {
   backdrop-filter: blur(16px) saturate(1.2);
   -webkit-backdrop-filter: blur(16px) saturate(1.2);
-  border-bottom: 1px solid rgba(139, 156, 247, 0.06);
+  border-bottom: 1px solid rgba(var(--cosmic-accent-rgb), 0.06);
 }
 
 /* Hide dark/light toggle */
@@ -70,7 +159,7 @@
 
 /* Subtle footer */
 .VPFooter {
-  border-top-color: rgba(139, 156, 247, 0.08) !important;
+  border-top-color: rgba(var(--cosmic-accent-rgb), 0.08) !important;
 }
 
 /* Custom scrollbar */
@@ -83,12 +172,12 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(139, 156, 247, 0.2);
+  background: rgba(var(--cosmic-accent-rgb), 0.2);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(139, 156, 247, 0.35);
+  background: rgba(var(--cosmic-accent-rgb), 0.35);
 }
 
 /* Smooth scroll */
@@ -98,21 +187,21 @@ html {
 
 /* Selection color */
 ::selection {
-  background: rgba(139, 156, 247, 0.3);
-  color: #fff;
+  background: rgba(var(--cosmic-accent-rgb), 0.3);
+  color: var(--cosmic-selection-text);
 }
 
 /* Nav link hover glow */
 .VPNavBarMenuLink .VPLink:hover {
   color: var(--vp-c-brand-1) !important;
-  text-shadow: 0 0 12px rgba(139, 156, 247, 0.3);
+  text-shadow: 0 0 12px rgba(var(--cosmic-accent-rgb), 0.3);
 }
 
 /* Content page enhancements */
 .vp-doc h1,
 .vp-doc h2,
 .vp-doc h3 {
-  background: linear-gradient(135deg, var(--vp-c-text-1), var(--vp-c-brand-1));
+  background: linear-gradient(135deg, var(--cosmic-heading-from), var(--cosmic-heading-to));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -120,19 +209,43 @@ html {
 
 /* Code block glow */
 .vp-doc div[class*='language-'] {
-  border: 1px solid rgba(139, 156, 247, 0.08);
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3), 0 0 40px rgba(139, 156, 247, 0.03);
+  border: 1px solid rgba(var(--cosmic-accent-rgb), 0.08);
+  box-shadow: 0 4px 24px var(--cosmic-code-shadow), 0 0 40px rgba(var(--cosmic-accent-rgb), 0.03);
 }
 
-/* Scroll progress bar */
-.scroll-progress {
+/* Dawn code block overrides — force light syntax theme */
+.dusk .vp-doc div[class*='language-'] {
+  background-color: #fdf8f0 !important;
+}
+
+.dusk .vp-doc div[class*='language-'] code {
+  color: #3d3428 !important;
+}
+
+.dusk .vp-doc div[class*='language-'] .line span {
+  filter: saturate(1.5) brightness(0.55);
+}
+
+.dusk .vp-doc div[class*='language-'] .lang {
+  color: #a89e8e !important;
+}
+
+/* Dawn ambient glow — warm light from top */
+.dusk .VPContent::after {
+  content: '';
   position: fixed;
   top: 0;
   left: 0;
-  height: 2px;
-  background: linear-gradient(90deg, #8b9cf7, #c4b5fd, #e0d4ff);
-  z-index: 999;
-  transition: width 0.1s linear;
+  right: 0;
+  height: 50vh;
+  background: radial-gradient(
+    ellipse 130% 50% at 50% -10%,
+    rgba(232, 192, 96, 0.08) 0%,
+    rgba(212, 160, 48, 0.03) 40%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 0;
 }
 
 /* Page transition */

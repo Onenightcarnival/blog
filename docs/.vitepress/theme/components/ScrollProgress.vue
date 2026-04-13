@@ -29,9 +29,9 @@ onUnmounted(() => {
   top: 0;
   left: 0;
   height: 2px;
-  background: linear-gradient(90deg, #8b9cf7, #c4b5fd, #e0d4ff);
+  background: linear-gradient(90deg, var(--cosmic-progress-1), var(--cosmic-progress-2), var(--cosmic-progress-3));
   z-index: 999;
   pointer-events: none;
-  transition: width 0.05s linear;
+  transition: width 0.05s linear, background 0.5s ease;
 }
 </style>

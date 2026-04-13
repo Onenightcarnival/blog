@@ -107,8 +107,8 @@ onUnmounted(() => {
   padding: 1px;
   background: linear-gradient(
     135deg,
-    rgba(139, 156, 247, 0) 0%,
-    rgba(139, 156, 247, 0) 100%
+    rgba(var(--cosmic-accent-rgb), 0) 0%,
+    rgba(var(--cosmic-accent-rgb), 0) 100%
   );
   -webkit-mask:
     linear-gradient(#fff 0 0) content-box,
@@ -120,18 +120,18 @@ onUnmounted(() => {
 }
 
 .tweet-card:hover {
-  border-color: rgba(139, 156, 247, 0.25);
+  border-color: rgba(var(--cosmic-accent-rgb), 0.25);
   box-shadow:
     0 4px 24px rgba(0, 0, 0, 0.3),
-    0 0 40px rgba(139, 156, 247, 0.06);
+    0 0 40px rgba(var(--cosmic-accent-rgb), 0.06);
   transform: translateY(-2px);
 }
 
 .tweet-card:hover::before {
   background: linear-gradient(
     135deg,
-    rgba(139, 156, 247, 0.2) 0%,
-    rgba(196, 181, 253, 0.1) 100%
+    rgba(var(--cosmic-accent-rgb), 0.2) 0%,
+    rgba(var(--cosmic-accent-rgb), 0.1) 100%
   );
 }
 
@@ -159,7 +159,7 @@ onUnmounted(() => {
 }
 
 .tweet-content :deep(a:hover) {
-  text-shadow: 0 0 8px rgba(139, 156, 247, 0.4);
+  text-shadow: 0 0 8px rgba(var(--cosmic-accent-rgb), 0.4);
 }
 
 .tweet-content :deep(code) {

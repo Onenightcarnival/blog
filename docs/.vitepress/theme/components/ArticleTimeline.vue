@@ -157,12 +157,12 @@ onUnmounted(() => {
   border-radius: 50%;
   background: var(--vp-c-bg);
   border: 3px solid var(--vp-c-brand-1);
-  box-shadow: 0 0 12px rgba(139, 156, 247, 0.3);
+  box-shadow: 0 0 12px rgba(var(--cosmic-accent-rgb), 0.3);
   transition: box-shadow 0.3s;
 }
 
 .year-group:hover .year-dot {
-  box-shadow: 0 0 20px rgba(139, 156, 247, 0.5);
+  box-shadow: 0 0 20px rgba(var(--cosmic-accent-rgb), 0.5);
 }
 
 .year-label {
@@ -192,7 +192,7 @@ onUnmounted(() => {
 
 .post-node:hover .post-dot {
   opacity: 1;
-  box-shadow: 0 0 10px rgba(139, 156, 247, 0.6);
+  box-shadow: 0 0 10px rgba(var(--cosmic-accent-rgb), 0.6);
   transform: scale(1.3);
 }
 
@@ -207,8 +207,8 @@ onUnmounted(() => {
 }
 
 .post-card:hover {
-  background: rgba(139, 156, 247, 0.04);
-  border-color: rgba(139, 156, 247, 0.1);
+  background: rgba(var(--cosmic-accent-rgb), 0.04);
+  border-color: rgba(var(--cosmic-accent-rgb), 0.1);
   box-shadow: 0 2px 16px rgba(0, 0, 0, 0.2);
   transform: translateX(4px);
 }

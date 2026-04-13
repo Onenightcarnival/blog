@@ -164,12 +164,12 @@ onUnmounted(() => {
   border-radius: 50%;
   background: var(--vp-c-bg);
   border: 3px solid var(--vp-c-brand-1);
-  box-shadow: 0 0 12px rgba(139, 156, 247, 0.3);
+  box-shadow: 0 0 12px rgba(var(--cosmic-accent-rgb), 0.3);
   transition: box-shadow 0.3s;
 }
 
 .category-group:hover .category-dot {
-  box-shadow: 0 0 20px rgba(139, 156, 247, 0.5);
+  box-shadow: 0 0 20px rgba(var(--cosmic-accent-rgb), 0.5);
 }
 
 .category-label {
@@ -204,7 +204,7 @@ onUnmounted(() => {
 
 .work-node:hover .work-dot {
   opacity: 1;
-  box-shadow: 0 0 10px rgba(139, 156, 247, 0.6);
+  box-shadow: 0 0 10px rgba(var(--cosmic-accent-rgb), 0.6);
   transform: scale(1.3);
 }
 
@@ -217,10 +217,10 @@ onUnmounted(() => {
 }
 
 .work-card:hover {
-  border-color: rgba(139, 156, 247, 0.25);
+  border-color: rgba(var(--cosmic-accent-rgb), 0.25);
   box-shadow:
     0 4px 24px rgba(0, 0, 0, 0.3),
-    0 0 40px rgba(139, 156, 247, 0.06);
+    0 0 40px rgba(var(--cosmic-accent-rgb), 0.06);
   transform: translateX(4px);
 }
 

@@ -48,12 +48,13 @@ onMounted(() => {
   border-radius: 50%;
   background: radial-gradient(
     circle,
-    rgba(139, 156, 247, 0.08) 0%,
-    rgba(139, 156, 247, 0.02) 40%,
+    var(--cosmic-glow) 0%,
+    var(--cosmic-glow-soft) 40%,
     transparent 70%
   );
   pointer-events: none;
   animation: hero-pulse 6s ease-in-out infinite;
+  transition: background 0.5s ease;
 }
 
 @keyframes hero-pulse {
@@ -89,6 +90,7 @@ onMounted(() => {
   background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: gradient-shift 8s ease infinite;
+  transition: background 0.5s ease;
 }
 
 @keyframes gradient-shift {
