@@ -1,12 +1,14 @@
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import { usePyodide, detectEnvKeys } from '../composables/usePyodide'
+import { codeToHtml } from 'shiki'
 
 const props = defineProps<{ code: string }>()
 
 const { state, statusMessage, runCode } = usePyodide()
 
 const editableCode = ref('')
+const highlightedHtml = ref('')
 const stdout = ref('')
 const stderr = ref('')
 const result = ref<string | null>(null)
@@ -24,6 +26,17 @@ onMounted(() => {
   } catch {
     editableCode.value = props.code
   }
+
+  checkTheme()
+  updateHighlight()
+
+  // Watch for theme toggle
+  const observer = new MutationObserver(() => {
+    const wasDusk = isDusk.value
+    checkTheme()
+    if (wasDusk !== isDusk.value) updateHighlight()
+  })
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
 
   // Detect required env keys
   envKeys.value = detectEnvKeys(editableCode.value)
@@ -79,19 +92,38 @@ async function handleRun() {
   error.value = output.error
 }
 
+// Shiki-based syntax highlighting
+const isDusk = ref(false)
+
+async function updateHighlight() {
+  const theme = isDusk.value ? 'github-light' : 'one-dark-pro'
+  const html = await codeToHtml(editableCode.value || ' ', { lang: 'python', theme })
+  // Extract inner content and remove newlines between line spans (they cause double spacing)
+  const match = html.match(/<code[^>]*>([\s\S]*)<\/code>/)
+  const inner = match ? match[1] : html
+  highlightedHtml.value = inner
+}
+
+function checkTheme() {
+  isDusk.value = document.documentElement.classList.contains('dusk')
+}
+
 // Auto-resize textarea
 function autoResize(e: Event) {
   const el = e.target as HTMLTextAreaElement
   el.style.height = 'auto'
   el.style.height = el.scrollHeight + 'px'
+  updateHighlight()
 }
+
+// Re-highlight when code changes from outside (e.g. reset)
+watch(editableCode, () => updateHighlight())
 </script>
 
 <template>
   <div class="pyodide-runner">
     <div class="pyodide-header">
       <span class="pyodide-lang">Python</span>
-      <span class="pyodide-badge">WASM</span>
     </div>
 
     <!-- API Key inputs -->
@@ -113,6 +145,7 @@ function autoResize(e: Event) {
 
     <!-- Code editor -->
     <div class="pyodide-code-wrapper">
+      <pre class="pyodide-code-highlight" aria-hidden="true" v-html="highlightedHtml" />
       <textarea
         v-model="editableCode"
         class="pyodide-code"
@@ -230,19 +263,40 @@ function autoResize(e: Event) {
   margin-top: 4px;
 }
 
-/* Code area */
+/* Code area — overlay pattern */
 .pyodide-code-wrapper {
   position: relative;
+  background: var(--vp-code-bg);
+}
+
+.pyodide-code-highlight {
+  margin: 0;
+  padding: 16px;
+  font-family: 'Fira Code', 'Courier New', monospace;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.6;
+  tab-size: 4;
+  white-space: pre-wrap;
+  word-break: break-all;
+  pointer-events: none;
+  background: none;
+  min-height: 60px;
+  box-sizing: border-box;
 }
 
 .pyodide-code {
-  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
+  height: 100%;
   padding: 16px;
   margin: 0;
   border: none;
-  background: var(--vp-code-bg);
-  color: var(--vp-c-text-1);
+  background: transparent;
+  color: transparent;
+  caret-color: var(--vp-c-text-1);
   font-family: 'Fira Code', 'Courier New', monospace;
   font-size: 14px;
   line-height: 1.6;
@@ -252,6 +306,13 @@ function autoResize(e: Event) {
   overflow: hidden;
   min-height: 60px;
   box-sizing: border-box;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+/* Shiki line spans — use inline display, let \n in the HTML handle line breaks */
+.pyodide-code-highlight :deep(.line) {
+  display: inline;
 }
 
 /* Actions bar */
@@ -354,3 +415,4 @@ function autoResize(e: Event) {
   background: rgba(60, 52, 40, 0.08);
 }
 </style>
+
