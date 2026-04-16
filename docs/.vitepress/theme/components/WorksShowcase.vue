@@ -23,6 +23,11 @@ const zhCategories = [
         description: '基于 complexipy 的 MCP server，为 Python 代码库提供认知复杂度分析，帮助定位过于复杂的函数。',
         link: 'https://github.com/Onenightcarnival/complexipy-mcp',
       },
+      {
+        title: 'Agent Sandbox Playground',
+        description: '浏览器端的自定义 OpenAI 格式 skill 调试沙盒。上传 skill .zip 包，通过聊天界面与任意 OpenAI 兼容 LLM 交互测试。',
+        link: 'https://onenightcarnival.github.io/agent-sandbox-playground/',
+      },
     ],
   },
 ]
@@ -45,6 +50,11 @@ const enCategories = [
         title: 'complexipy-mcp',
         description: 'An MCP server built on complexipy, providing cognitive complexity analysis for Python codebases to help locate overly complex functions.',
         link: 'https://github.com/Onenightcarnival/complexipy-mcp',
+      },
+      {
+        title: 'Agent Sandbox Playground',
+        description: 'Browser-based playground for debugging custom OpenAI-format skills. Upload skill .zip packages and test them interactively via chat with any OpenAI-compatible LLM.',
+        link: 'https://onenightcarnival.github.io/agent-sandbox-playground/',
       },
     ],
   },
