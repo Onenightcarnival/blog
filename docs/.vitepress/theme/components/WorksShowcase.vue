@@ -28,6 +28,11 @@ const zhCategories = [
         description: '浏览器端的自定义 OpenAI 格式 skill 调试沙盒。上传 skill .zip 包，通过聊天界面与任意 OpenAI 兼容 LLM 交互测试。',
         link: 'https://onenightcarnival.github.io/agent-sandbox-playground/',
       },
+      {
+        title: 'zh-natural-writing',
+        description: '中文自然写作 Codex skill，用来改掉 AI 味、翻译腔和套话，让中文表达更直接、更像人写。',
+        link: 'https://github.com/Onenightcarnival/zh-natural-writing',
+      },
     ],
   },
 ]
@@ -55,6 +60,11 @@ const enCategories = [
         title: 'Agent Sandbox Playground',
         description: 'Browser-based playground for debugging custom OpenAI-format skills. Upload skill .zip packages and test them interactively via chat with any OpenAI-compatible LLM.',
         link: 'https://onenightcarnival.github.io/agent-sandbox-playground/',
+      },
+      {
+        title: 'zh-natural-writing',
+        description: 'A Codex skill for natural Chinese writing — strips out AI-speak, translationese, and stock phrases so the prose reads more direct and human.',
+        link: 'https://github.com/Onenightcarnival/zh-natural-writing',
       },
     ],
   },
