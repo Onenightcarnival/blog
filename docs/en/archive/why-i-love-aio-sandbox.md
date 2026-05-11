@@ -1,6 +1,7 @@
 ---
 title: Why I Like AIO Sandbox So Much
 date: 2026-05-10 21:05
+translated: true
 ---
 
 # Why I Like AIO Sandbox So Much
