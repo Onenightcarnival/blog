@@ -13,11 +13,21 @@ const zhCategories = [
         description: '当软件系统的核心组件从确定性函数变成概率性语言模型，软件工程的基本原则会发生什么变化，又有什么不会变。',
         link: 'https://onenightcarnival.github.io/llm-engineering-philosophy/',
       },
+      {
+        title: 'Agent 工程哲学',
+        description: '当软件的基本构件从概率模型升格为自主角色，有岗位、有技能、有记忆、有自己的工作环境，软件工程需要重新理解什么。',
+        link: 'https://onenightcarnival.github.io/agent-engineering-philosophy/',
+      },
     ],
   },
   {
     name: '做出来的',
     items: [
+      {
+        title: 'AI Radar',
+        description: '多资讯源 AI 信息站，把 GitHub、arXiv、Anthropic 等来源的 AI 动向整理成可读的日报、周报和月报。',
+        link: 'https://onenightcarnival.github.io/ai-radar/',
+      },
       {
         title: 'complexipy-mcp',
         description: '基于 complexipy 的 MCP server，为 Python 代码库提供认知复杂度分析，帮助定位过于复杂的函数。',
@@ -46,11 +56,21 @@ const enCategories = [
         description: 'When the core component of a software system shifts from deterministic functions to probabilistic language models — what changes in software engineering, and what stays the same.',
         link: 'https://onenightcarnival.github.io/llm-engineering-philosophy/',
       },
+      {
+        title: 'Agent Engineering Philosophy',
+        description: 'A follow-up on engineering agents as autonomous roles with jobs, skills, memory, and working environments, not just probabilistic model calls.',
+        link: 'https://onenightcarnival.github.io/agent-engineering-philosophy/',
+      },
     ],
   },
   {
     name: 'Built',
     items: [
+      {
+        title: 'AI Radar',
+        description: 'A multi-source AI information hub that distills GitHub, arXiv, Anthropic, and related AI updates into readable daily, weekly, and monthly reports.',
+        link: 'https://onenightcarnival.github.io/ai-radar/',
+      },
       {
         title: 'complexipy-mcp',
         description: 'An MCP server built on complexipy, providing cognitive complexity analysis for Python codebases to help locate overly complex functions.',
