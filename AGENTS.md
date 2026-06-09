@@ -38,9 +38,10 @@ docs/
 
 ## Commands
 
-- `npm run dev` — Start local dev server
-- `npm run build` — Build for production
-- `npm run preview` — Preview production build locally
+- `bun install` — Install dependencies
+- `bun run dev` — Start local dev server
+- `bun run build` — Build for production
+- `bun run preview` — Preview production build locally
 
 ## Content Conventions
 
