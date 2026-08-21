@@ -43,6 +43,11 @@ const zhCategories = [
         description: '中文自然写作 Codex skill，用来改掉 AI 味、翻译腔和套话，让中文表达更直接、更像人写。',
         link: 'https://github.com/Onenightcarnival/zh-natural-writing',
       },
+      {
+        title: 'DeepSeek Harness Desktop',
+        description: 'DeepSeek Harness（dsh）的非官方桌面应用，用 Electron 壳打包官方 npm 版本，提供 Windows 和 macOS 安装包，支持内核自动更新、插件管理、代理配置，以及 MCP、skill、上下文压缩等常用配置修改。预置插件只收与 dsh 内核测试过的少数社区插件。',
+        link: 'https://github.com/Onenightcarnival/deepseek-harness-desktop',
+      },
     ],
   },
 ]
@@ -85,6 +90,11 @@ const enCategories = [
         title: 'zh-natural-writing',
         description: 'A Codex skill for natural Chinese writing — strips out AI-speak, translationese, and stock phrases so the prose reads more direct and human.',
         link: 'https://github.com/Onenightcarnival/zh-natural-writing',
+      },
+      {
+        title: 'DeepSeek Harness Desktop',
+        description: 'An unofficial desktop app for DeepSeek Harness (dsh): an Electron shell packaging the official npm release into Windows and macOS installers, with kernel auto-update, plugin management, proxy configuration, and editing of common settings such as MCP, skills, and context compaction. The preset plugins are limited to the few community ones tested against the dsh kernel.',
+        link: 'https://github.com/Onenightcarnival/deepseek-harness-desktop',
       },
     ],
   },
